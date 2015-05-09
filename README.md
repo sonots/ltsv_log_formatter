@@ -35,8 +35,8 @@ config.logger.formatter = LtsvLogFormatter.new
 Passing a hash parameter:
 
 ```
-irb> logger.info({foo: "bar"})
-time:20150423T00:00:00+09:00\tlevel:INFO\tfoo:bar
+irb> logger.info({foo: "foo", bar: "bar"})
+time:20150423T00:00:00+09:00\tlevel:INFO\tfoo:foo\tbar:bar
 ```
 
 Passing a string parameter: `message` key is used as default
@@ -46,7 +46,7 @@ irb> logger.info("foo")
 time:20150423T00:00:00+09:00\tlevel:INFO\tmessage:foo
 ```
 
-Line feed: Notice that the line feed character `\n` is converted into `\\n`
+NOTE: Notice that the line feed character `\n` is converted into `\\n` because LTSV format does not allow to break lines
 
 ```ruby
 irb> logger.info("foo\nbar")
