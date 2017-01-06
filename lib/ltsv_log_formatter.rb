@@ -28,10 +28,16 @@ class LtsvLogFormatter
     "#{@opts[:level_key]}:#{severity}\t" if @opts[:level_key]
   end
 
+  LF = "\n".freeze
+  TAB = "\t".freeze
+  ESCAPED_LF = "\\n".freeze
+  ESCAPED_TAB = "\\t".freeze
+  ESCAPE_TARGET = /[#{LF}#{TAB}]/
+
   def format_message(msg)
     unless msg.is_a?(Hash)
       msg = { @opts[:message_key] => msg }
     end
-    msg.map {|k, v| "#{k}:#{v.to_s.gsub(/\n/, "\\n").gsub(/\t/, "\\t")}" }.join("\t")
+    msg.map {|k, v| "#{k}:#{v.to_s.gsub(ESCAPE_TARGET, LF => ESCAPED_LF, TAB => ESCAPED_TAB)}" }.join(TAB)
   end
 end

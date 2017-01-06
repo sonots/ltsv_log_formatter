@@ -135,4 +135,20 @@ describe LtsvLogFormatter do
       end
     end
   end
+
+  describe 'escape LF and TAB' do
+    context 'with LF' do
+      it do
+        logger.info(foo: "bar\nbar")
+        expect(gets).to eq "time:#{now}\tlevel:INFO\tfoo:bar\\nbar\n"
+      end
+    end
+
+    context 'with TAB' do
+      it do
+        logger.info(foo: "bar\tbar")
+        expect(gets).to eq "time:#{now}\tlevel:INFO\tfoo:bar\\tbar\n"
+      end
+    end
+  end
 end
