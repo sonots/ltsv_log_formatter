@@ -32,6 +32,6 @@ class LtsvLogFormatter
     unless msg.is_a?(Hash)
       msg = { @opts[:message_key] => msg }
     end
-    msg.map {|k, v| "#{k}:#{v.to_s.gsub(/\n/, "\\n")}" }.join("\t")
+    msg.map {|k, v| "#{k}:#{v.to_s.gsub(/\n/, "\\n").gsub(/\t/, "\\t")}" }.join("\t")
   end
 end
