@@ -46,11 +46,18 @@ irb> logger.info("foo")
 time:20150423T00:00:00+09:00\tlevel:INFO\tmessage:foo
 ```
 
-NOTE: Notice that the line feed character `\n` is converted into `\\n` because LTSV format does not allow to break lines
+NOTE1: Notice that the line feed character `\n` is converted into `\\n` because LTSV format does not allow to break lines
 
 ```ruby
 irb> logger.info("foo\nbar")
 time:20150423T00:00:00+09:00\tlevel:INFO\tmessage:foo\\nbar
+```
+
+NOTE2: Notice that the tab character `\t` is converted into `\\t` because message might have a string as "\t<string>:<string>"
+
+```ruby
+irb> logger.info("foo\tbar:baz")
+time:20150423T00:00:00+09:00\tlevel:INFO\tmessage:foo\\tbar:baz
 ```
 
 ## Options
